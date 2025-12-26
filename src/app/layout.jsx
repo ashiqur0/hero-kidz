@@ -1,5 +1,6 @@
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/layouts/Navbar";
 
 // initialize font
 const poppins = Poppins(
@@ -20,7 +21,12 @@ export default function RootLayout({ children }) {
         // use the font to entire html body
         className={`${poppins.className} antialiased`}
       >
-        {children}
+        <header>
+          <Navbar />
+        </header>
+        <main>
+          {children}
+        </main>
       </body>
     </html>
   );
