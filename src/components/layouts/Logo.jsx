@@ -10,7 +10,7 @@ const Logo = () => {
                 width={50}
                 height={40}
             />
-            <h2 className='text-xl font-bold'>Hero Kidz</h2>
+            <h2 className='text-xl font-bold'>Hero <span className='text-primary'>Kidz</span></h2>
         </Link>
     );
 };
