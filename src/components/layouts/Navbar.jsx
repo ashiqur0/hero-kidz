@@ -6,7 +6,7 @@ import NavLink from './NavLink';
 const Navbar = () => {
 
     const links = <>
-        <li><NavLink href='/'>Home</NavLink></li>
+        <li><NavLink href='/products'>Products</NavLink></li>
     </>
 
     return (
