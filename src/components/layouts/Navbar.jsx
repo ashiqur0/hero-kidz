@@ -1,11 +1,12 @@
 import Link from 'next/link';
 import React from 'react';
 import Logo from './Logo';
+import NavLink from './NavLink';
 
 const Navbar = () => {
 
     const links = <>
-        <li><Link href='/'>Home</Link></li>
+        <li><NavLink href='/'>Home</NavLink></li>
     </>
 
     return (
