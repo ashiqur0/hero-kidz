@@ -2,6 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import Logo from './Logo';
 import NavLink from './NavLink';
+import { MdOutlineShoppingCart } from "react-icons/md";
 
 const Navbar = () => {
 
@@ -31,8 +32,9 @@ const Navbar = () => {
                     {links}
                 </ul>
             </div>
-            <div className="navbar-end md:flex hidden w-full">
-                <Link href='/login ' className="btn btn-sm btn-soft btn-success border border-green-400">Login</Link>
+            <div className="navbar-end md:flex gap-4 hidden w-full">
+                <Link href={'/cart'} className='btn '><MdOutlineShoppingCart /></Link>
+                <Link href='/login ' className="btn btn-outline btn-primary border">Login</Link>
             </div>
         </div>
     );
