@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
+import Logo from './Logo';
 
 const Navbar = () => {
 
@@ -8,7 +9,7 @@ const Navbar = () => {
     </>
 
     return (
-        <div className="navbar bg-base-100 shadow-sm">
+        <div className="navbar bg-base-100">
             <div className="navbar-start w-full">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -20,14 +21,14 @@ const Navbar = () => {
                         {links}
                     </ul>
                 </div>
-                <Link href={'/'} className="btn btn-ghost text-xl">Hero Kidz</Link>
+                <Logo />
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
                     {links}
                 </ul>
             </div>
-            <div className="navbar-end w-full">
+            <div className="navbar-end md:flex hidden w-full">
                 <Link href='/login ' className="btn btn-sm btn-soft btn-success border border-green-400">Login</Link>
             </div>
         </div>
