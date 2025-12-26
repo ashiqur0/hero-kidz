@@ -1,8 +1,12 @@
 import React from 'react';
+import Logo from './Logo';
 
 const Footer = () => {
     return (
-        <footer className="footer sm:footer-horizontal bg-base-300 text-base-content p-10">
+        <footer className="footer sm:footer-horizontal bg-neutral text-neutral-content p-10">
+            <nav>
+                <Logo />
+            </nav>
             <nav>
                 <h6 className="footer-title">Services</h6>
                 <a className="link link-hover">Branding</a>
