@@ -4,7 +4,6 @@ import ProductCard from '@/components/cards/ProductCard';
 const Products = async () => {
 
     const products = (await getProducts()) || [];
-    console.log(products);
 
     return (
         <div className='my-10'>
@@ -12,7 +11,7 @@ const Products = async () => {
 
             <div className='grid md:grid-cols-3 gap-5'>
                 {
-                    products.map(product => <ProductCard key={product.title} product={product}>{product.title}</ProductCard>)
+                    products.map(product => <ProductCard key={product._id} product={product}>{product.title}</ProductCard>)
                 }
             </div>
         </div>

@@ -4,10 +4,9 @@ import { FaStar, FaCheckCircle } from "react-icons/fa";
 
 const ProductDetails = async ({ params }) => {
 
-    const { id } = params;
-    console.log({ id });
-    const product = (await getSingleProducts(id)) || {};
-
+    const { id } = await params;
+    const product = await getSingleProducts(id);
+    
     const { title, bangla, image, price, discount, ratings, reviews, sold, description, info, qna, } = product;
 
     const finalPrice = discount

@@ -1,9 +1,11 @@
 import Image from "next/image";
 import { FaStar, FaShoppingCart } from "react-icons/fa";
-import ViewDetails from "../buttons/ViewDetails";
+import Link from "next/link";
+import { CgDetailsMore } from "react-icons/cg";
 
 const ProductCard = ({ product }) => {
-  const { title, image, price, discount, ratings, reviews, sold } = product;
+  
+  const { _id, title, image, price, discount, ratings, reviews, sold } = product;
 
   // calculate discounted price
   const finalPrice = discount
@@ -61,7 +63,10 @@ const ProductCard = ({ product }) => {
             Add To Cart
           </button>
 
-          <ViewDetails />
+          <Link href={`/products/${_id}`} className="btn btn-primary btn-sm w-full flex items-center gap-2">
+            <CgDetailsMore />
+            View Details
+          </Link>
         </div>
       </div>
     </div>

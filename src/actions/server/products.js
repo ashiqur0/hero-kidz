@@ -14,11 +14,11 @@ export const latestProducts = async () => {
 }
 
 export const getSingleProducts = async (id) => {
-    if (!id.length == 24) {
+    if (id.length != 24) {
         return {};
     }
 
-    const query = { _id: new ObjectId };
+    const query = { _id: new ObjectId(id) };
     const product = await dbConnect(collections.PRODUCTS).findOne(query);
     return product;
 }
