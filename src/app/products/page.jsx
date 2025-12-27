@@ -1,7 +1,11 @@
-import products from '@/app/data/toys.json';
+import { getProducts } from '@/actions/server/products';
 import ProductCard from '@/components/cards/ProductCard';
 
-const Products = () => {
+const Products = async () => {
+
+    const products = (await getProducts()) || [];
+    console.log(products);
+
     return (
         <div className='my-10'>
             <h1 className='text-2xl font-semibold mb-2'>Total <span className='text-primary'>{products.length}</span> Products</h1>
