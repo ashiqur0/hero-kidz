@@ -1,5 +1,7 @@
 'use client'
 
+import Link from "next/link";
+
 const page = () => {
     return (
         <div className='min-h-screen flex justify-center items-center'>
@@ -20,6 +22,7 @@ const page = () => {
                         <div><a className="link link-hover">Forgot password?</a></div>
 
                         <button className="btn btn-soft btn-primary border border-red-500 mt-4">Sign up</button>
+                        <Link href={'/auth/login'}>Already have an account? <span className='text-blue-500 mt-2'>login</span></Link>
                     </fieldset>
                 </div>
             </div>
