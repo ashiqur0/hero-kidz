@@ -1,4 +1,5 @@
 import { getSingleProducts } from "@/actions/server/products";
+import AddToCurtButton from "@/components/buttons/AddToCurtButton";
 import Image from "next/image";
 import { FaStar, FaCheckCircle } from "react-icons/fa";
 
@@ -89,9 +90,7 @@ const ProductDetails = async ({ params }) => {
                     </div>
 
                     {/* Action */}
-                    <button className="btn btn-primary mt-4 w-full md:w-auto">
-                        Add To Cart
-                    </button>
+                    <AddToCurtButton product={product} />
 
                     {/* Highlights */}
                     <div className="mt-6">
