@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link';
 
 const Login = () => {
     return (
@@ -14,6 +15,7 @@ const Login = () => {
                         <div><a className="link link-hover">Forgot password?</a></div>
 
                         <button className="btn btn-soft btn-primary border border-red-500 mt-4">Login</button>
+                        <Link href={'/auth/register'}>Do not have an account? <span className='text-blue-500 mt-2'>sign up</span></Link>
                     </fieldset>
                 </div>
             </div>
