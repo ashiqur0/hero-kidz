@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { FaStar, FaShoppingCart } from "react-icons/fa";
+import ViewDetails from "../buttons/ViewDetails";
 
 const ProductCard = ({ product }) => {
   const { title, image, price, discount, ratings, reviews, sold } = product;
@@ -59,6 +60,8 @@ const ProductCard = ({ product }) => {
             <FaShoppingCart />
             Add To Cart
           </button>
+
+          <ViewDetails />
         </div>
       </div>
     </div>
