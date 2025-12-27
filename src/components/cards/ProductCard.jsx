@@ -2,15 +2,7 @@ import Image from "next/image";
 import { FaStar, FaShoppingCart } from "react-icons/fa";
 
 const ProductCard = ({ product }) => {
-  const {
-    title,
-    image,
-    price,
-    discount,
-    ratings,
-    reviews,
-    sold,
-  } = product;
+  const { title, image, price, discount, ratings, reviews, sold } = product;
 
   // calculate discounted price
   const finalPrice = discount
