@@ -6,7 +6,7 @@ const Products = () => {
         <div className='f'>
             <h1 className='text-center text-4xl font-bold mb-10'>Our Products</h1>
 
-            <div className='grid grid-cols-3 gap-3'>
+            <div className='grid md:grid-cols-3 gap-5'>
                 {
                     products.map(product => <ProductCard key={product.title} product={product}>{product.title}</ProductCard>)
                 }
