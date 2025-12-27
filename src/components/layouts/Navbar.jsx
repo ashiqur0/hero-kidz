@@ -34,7 +34,7 @@ const Navbar = () => {
             </div>
             <div className="navbar-end md:flex gap-4 hidden w-full">
                 <Link href={'/cart'} className='btn btn-primary'><MdOutlineShoppingCart /></Link>
-                <Link href='/login ' className="btn btn-outline btn-primary border">Login</Link>
+                <Link href='/auth/login ' className="btn btn-outline btn-primary border">Login</Link>
             </div>
         </div>
     );
