@@ -1,7 +1,13 @@
+import { getSingleProducts } from "@/actions/server/products";
 import Image from "next/image";
 import { FaStar, FaCheckCircle } from "react-icons/fa";
 
-const ProductDetails = ({ product }) => {
+const ProductDetails = async ({ params }) => {
+
+    const { id } = params;
+    console.log({ id });
+    const product = (await getSingleProducts(id)) || {};
+
     const { title, bangla, image, price, discount, ratings, reviews, sold, description, info, qna, } = product;
 
     const finalPrice = discount
