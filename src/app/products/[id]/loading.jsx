@@ -1,11 +1,12 @@
+import ProductDetailsSkeleton from '@/components/skeleton/ProductDetailsSkeleton';
 import React from 'react';
 
-const loading = () => {
+const ProductDetailsLoading = () => {
     return (
         <div>
-            
+            <ProductDetailsSkeleton />
         </div>
     );
 };
 
-export default loading;
+export default ProductDetailsLoading;
