@@ -8,6 +8,11 @@ export const getProducts = async () => {
     return products;
 }
 
+export const latestProducts = async () => {
+    const products = await dbConnect(collections.PRODUCTS).find().limit(6).toArray();
+    return products;
+}
+
 export const getSingleProducts = async (id) => {
     if (!id.length == 24) {
         return {};
