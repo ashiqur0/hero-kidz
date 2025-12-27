@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { FaStar, FaShoppingCart } from "react-icons/fa";
 import { CgDetailsMore } from "react-icons/cg";
+import Link from "next/link";
 
 const ProductCard = ({ product }) => {
   const { title, image, price, discount, ratings, reviews, sold } = product;
@@ -61,10 +62,10 @@ const ProductCard = ({ product }) => {
             Add To Cart
           </button>
 
-          <button className="btn btn-primary btn-sm w-full flex items-center gap-2" id={product._id}>
+          <Link href={`/products/products-details/:${product._id}`} className="btn btn-primary btn-sm w-full flex items-center gap-2">
             <CgDetailsMore />
             View Details
-          </button>
+          </Link>
         </div>
       </div>
     </div>
