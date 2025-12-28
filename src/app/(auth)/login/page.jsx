@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { signIn } from "next-auth/react"
 import Swal from 'sweetalert2';
+import SocialLoginButtons from '@/components/buttons/SocialLoginButtons';
 
 const Login = () => {
 
@@ -55,6 +56,8 @@ const Login = () => {
                             <Link href={`/signup?callbackUrl=${callbackUrl}`}>Do not have an account? <span className='text-blue-500 mt-2'>sign up</span></Link>
                         </fieldset>
                     </form>
+
+                    <SocialLoginButtons />
                 </div>
             </div>
         </div>
