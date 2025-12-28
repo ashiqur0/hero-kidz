@@ -25,7 +25,7 @@ export const postUser = async (payload) => {
 
     // 4. insert user
     const result = await dbConnect(collections.USERS).insertOne(newUser);
-    if (result.acknowledge) {
+    if (result.acknowledged) {
         return {
             ...result,
             insertedId: result.insertedId.toString()
