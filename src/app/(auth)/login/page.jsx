@@ -1,7 +1,10 @@
 'use client'
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
 const Login = () => {
+
+    const callbackUrl = useSearchParams().get('callbackUrl') || '/';
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -39,7 +42,8 @@ const Login = () => {
                             <div><a className="link link-hover">Forgot password?</a></div>
 
                             <button type='submit' className="btn btn-soft btn-primary border border-red-500 mt-4">Login</button>
-                            <Link href={'/signup'}>Do not have an account? <span className='text-blue-500 mt-2'>sign up</span></Link>
+
+                            <Link href={`/signup?callbackUrl=${callbackUrl}`}>Do not have an account? <span className='text-blue-500 mt-2'>sign up</span></Link>
                         </fieldset>
                     </form>
                 </div>

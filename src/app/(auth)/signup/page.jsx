@@ -2,10 +2,11 @@
 
 import { postUser } from "@/actions/server/auth";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const Register = () => {
     const router = useRouter();
+    const callbackUrl = useSearchParams().get('callbackUrl');
 
     const handleRegister = async (e) => {
         e.preventDefault();
@@ -15,10 +16,10 @@ const Register = () => {
         const password = e.target.password.value;
         const user = { name, email, password };
 
-        const result = await postUser(user);        
+        const result = await postUser(user);
         if (result.acknowledged) {
             alert('success register');
-            router.push('/login');
+            router.push(`${callbackUrl}`);
         }
     }
 
