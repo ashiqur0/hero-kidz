@@ -3,6 +3,7 @@ import React from 'react';
 import Logo from './Logo';
 import NavLink from '../NavLink/NavLink';
 import { MdOutlineShoppingCart } from "react-icons/md";
+import AuthButtons from '../buttons/AuthButtons';
 
 const Navbar = () => {
 
@@ -34,7 +35,7 @@ const Navbar = () => {
             </div>
             <div className="navbar-end md:flex gap-4 hidden w-full">
                 <Link href={'/cart'} className='btn btn-primary'><MdOutlineShoppingCart /></Link>
-                <Link href='/login ' className="btn btn-outline btn-primary border">Login</Link>
+                <AuthButtons />
             </div>
         </div>
     );
