@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { signIn } from "next-auth/react"
+import Swal from 'sweetalert2';
 
 const Login = () => {
 
@@ -13,6 +14,11 @@ const Login = () => {
         const email = e.target.email.value;
         const password = e.target.password.value;
         const result = await signIn('credentials', { redirect: false, email, password });
+        if (result.ok) {
+            Swal.fire('success', 'Welcome to Hero Kidz', 'success');
+        } else {
+            Swal.fire('error', 'Email and password not matched', 'error');
+        }
     }
 
     return (
