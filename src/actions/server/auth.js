@@ -3,6 +3,7 @@
 import { collections, dbConnect } from "@/lib/dbConnect";
 import bcrypt from 'bcryptjs';
 
+// post user to database | used in register page
 export const postUser = async (payload) => {
     const { email, password, name } = payload;
 
@@ -32,3 +33,17 @@ export const postUser = async (payload) => {
         }
     }
 } 
+
+export const loginUser = async (payload) => {
+    const { email, password } = payload;
+    if (!email || !password) return null;
+    const user = await dbConnect(collections.USERS).findOne({ email });
+    if (!user) return null;
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (isMatch) {
+        return user;
+    } else {
+        return null;
+    }
+}

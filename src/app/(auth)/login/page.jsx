@@ -1,17 +1,18 @@
 'use client'
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import { signIn } from "next-auth/react"
 
 const Login = () => {
 
     const callbackUrl = useSearchParams().get('callbackUrl') || '/';
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
 
         const email = e.target.email.value;
         const password = e.target.password.value;
-        console.log({ email, password });
+        const result = await signIn('credentials', { redirect: false, email, password });
     }
 
     return (
