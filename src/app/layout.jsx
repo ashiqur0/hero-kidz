@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/layouts/Navbar";
 import Footer from "@/components/layouts/Footer";
 import localFont from 'next/font/local'
+import NextAutProvider from "@/provider/NextAutProvider";
 
 // initialize font
 const poppins = Poppins(
@@ -90,20 +91,22 @@ export const fontBangla = localFont({
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={`${poppins.className} antialiased`}>
-        <header>
-          <Navbar />
-        </header>
+    <NextAutProvider>
+      <html lang="en">
+        <body className={`${poppins.className} antialiased`}>
+          <header>
+            <Navbar />
+          </header>
 
-        <main className="py-2 md:w-7xl mx-auto min-h-[calc(100vh-287px)]">
-          {children}
-        </main>
+          <main className="py-2 md:w-7xl mx-auto min-h-[calc(100vh-287px)]">
+            {children}
+          </main>
 
-        <footer>
-          <Footer />
-        </footer>
-      </body>
-    </html>
+          <footer>
+            <Footer />
+          </footer>
+        </body>
+      </html>
+    </NextAutProvider>
   );
 }
