@@ -19,7 +19,7 @@ const Register = () => {
         const result = await postUser(user);
         if (result.acknowledged) {
             alert('success register');
-            router.push(`${callbackUrl}`);
+            router.push(`${callbackUrl? callbackUrl : '/login'}`);
         }
     }
 
