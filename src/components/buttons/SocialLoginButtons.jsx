@@ -3,13 +3,17 @@
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { signIn } from "next-auth/react";
-import Swal from "sweetalert2";
+import { useSearchParams } from "next/navigation";
 
 const SocialLoginButtons = () => {
 
+    const params = useSearchParams();
+
     const handleGoogleSignIn = async () => {
-        const result = await signIn('google', { redirect: false });
-        console.log('result', result);
+        const result = await signIn('google', { 
+            redirect: false, 
+            callbackUrl: params.get('callbackUrl') || '/' 
+        });
     }
 
     return (

@@ -14,11 +14,9 @@ const AddToCurtButton = ({ product }) => {
     }
 
     return (
-        <div>
-            <button onClick={add2Cart} className="btn btn-primary mt-4 w-full md:w-auto">
-                Add To Cart
-            </button>
-        </div>
+        <button onClick={add2Cart} className="btn btn-primary mt-4 w-full md:w-auto">
+            Add To Cart
+        </button>
     );
 };
 
