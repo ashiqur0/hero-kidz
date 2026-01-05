@@ -1,24 +1,25 @@
 'use client'
 
 import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { signIn } from "next-auth/react"
 import Swal from 'sweetalert2';
 
 const LoginForm = () => {
 
     const callbackUrl = useSearchParams().get('callbackUrl');
-    const router = useRouter();
 
     const handleLogin = async (e) => {
         e.preventDefault();
 
         const email = e.target.email.value;
         const password = e.target.password.value;
-        const result = await signIn('credentials', { redirect: false, email, password });
+        const result = await signIn('credentials', { 
+            email, password,
+            callbackUrl: callbackUrl || '/'
+         });
         if (result.ok) {
             Swal.fire('success', 'Welcome to Hero Kidz', 'success');
-            router.push('/');
         } else {
             Swal.fire('error', 'Email and password not matched', 'error');
         }
