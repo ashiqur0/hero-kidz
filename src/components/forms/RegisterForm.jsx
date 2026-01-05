@@ -4,10 +4,10 @@ import { postUser } from "@/actions/server/auth";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import Swal from "sweetalert2";
 
 const RegisterForm = () => {
 
-    const router = useRouter();
     const callbackUrl = useSearchParams().get('callbackUrl') || '/';
 
     const handleRegister = async (e) => {
@@ -20,11 +20,14 @@ const RegisterForm = () => {
 
         const result = await postUser(user);
         if (result.acknowledged) {
+            Swal.fire('success', 'Welcome to Hero Kidz', 'success');
 
             const result = await signIn('credentials', {
-            email, password,
-            callbackUrl: callbackUrl
-        });
+                email, password,
+                callbackUrl: callbackUrl
+            });
+        } else {
+            Swal.fire('error', 'Registration failed', 'error');
         }
     }
 
