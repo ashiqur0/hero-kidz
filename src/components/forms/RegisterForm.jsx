@@ -1,13 +1,14 @@
 'use client'
 
 import { postUser } from "@/actions/server/auth";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 
 const RegisterForm = () => {
 
     const router = useRouter();
-    const callbackUrl = useSearchParams().get('callbackUrl');
+    const callbackUrl = useSearchParams().get('callbackUrl') || '/';
 
     const handleRegister = async (e) => {
         e.preventDefault();
@@ -19,8 +20,11 @@ const RegisterForm = () => {
 
         const result = await postUser(user);
         if (result.acknowledged) {
-            alert('success register');
-            router.push(`${callbackUrl? callbackUrl : '/login'}`);
+
+            const result = await signIn('credentials', {
+            email, password,
+            callbackUrl: callbackUrl
+        });
         }
     }
 

@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 
 const LoginForm = () => {
 
-    const callbackUrl = useSearchParams().get('callbackUrl');
+    const callbackUrl = useSearchParams().get('callbackUrl') || '/';
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -16,7 +16,7 @@ const LoginForm = () => {
         const password = e.target.password.value;
         const result = await signIn('credentials', { 
             email, password,
-            callbackUrl: callbackUrl || '/'
+            callbackUrl: callbackUrl
          });
         if (result.ok) {
             Swal.fire('success', 'Welcome to Hero Kidz', 'success');
