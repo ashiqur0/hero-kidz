@@ -12,6 +12,10 @@ const Cart = ({ formattedItems = [] }) => {
         setItems(items.filter(item => item._id !== id));
     }
 
+    const updateQuantity = (id, q) => {
+        setItems(items.map(item => item._id == id ? { ...item, quantity: q } : item));
+    }
+
     return (
         <div>
             <p className='py-3'>
@@ -21,7 +25,12 @@ const Cart = ({ formattedItems = [] }) => {
             <div className='flex'>
                 <div className='flex-3'>
                     {
-                        items.map(item => <CartItem key={item._id.toString()} item={item} onRemove={removeItem}></CartItem>)
+                        items.map(item => <CartItem
+                            key={item._id.toString()}
+                            item={item}
+                            onRemove={removeItem}
+                            updateQuantity={updateQuantity}
+                        ></CartItem>)
                     }
                 </div>
                 <div className='flex-1'>{totalItems}</div>
