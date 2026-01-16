@@ -61,9 +61,18 @@ export const authOptions = {
       return session
     },
     async jwt({ token, user, account, profile, isNewUser }) {
+      // console.log('account data in session: ', account);
+
       if (user) {
-        token.email = user.email;
-        token.role = user.role;
+        if (account.provider) {
+          const dbUser = await dbConnect(collections.USERS).findOne({ email: user.email });
+
+          token.role = dbUser?.role;
+          token.email = dbUser?.email;
+        } else {
+          token.email = user.email;
+          token.role = user.role;
+        }
       }
       return token
     }

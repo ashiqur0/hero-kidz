@@ -20,6 +20,6 @@ const client = new MongoClient(uri, {
 
 // if no collection: create and connect || only connect collection
 export const dbConnect = (collection_name) => {
-    // !database && create + connect | connect database
+    // if no database then create + connect otherwise connect database
     return client.db(db_name).collection(collection_name);
 }
