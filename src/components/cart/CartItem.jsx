@@ -26,6 +26,7 @@ const CartItem = ({ item, onIncrease, onDecrease, onRemove }) => {
                         text: "Your file has been deleted.",
                         icon: "success"
                     });
+                    onRemove(_id);
                 } else {
                     Swal.fire({
                         title: "Oops!",

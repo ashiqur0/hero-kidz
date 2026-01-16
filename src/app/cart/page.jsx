@@ -1,11 +1,14 @@
 import { getCart } from '@/actions/server/cart';
-import CartItem from '@/components/cart/CartItem';
+import Cart from '@/components/cart/Cart';
 import React from 'react';
 
-const Cart = async () => {
+const CartPage = async () => {
 
     const cartItems = await getCart();
-    console.log(cartItems[0]);
+    const formattedItems = cartItems.map((item) => ({
+        ...item,
+        _id: item._id.toString()
+    }));
 
     return <div>
         {/* title */}
@@ -13,21 +16,10 @@ const Cart = async () => {
             <h2 className='text-4xl py-4 font-bold border-l-8 border-primary pl-8'>
                 My Cart
             </h2>
-            <p className='py-3'>
-                <span className='text-primary font-bold'>{cartItems.length}</span> Items Found in the Cart
-            </p>
         </div>
 
-        {/*  */}
-        <div className='flex'>
-            <div className='flex-3'>
-                {
-                    cartItems.map(item => <CartItem key={item._id.toString()} item={item}></CartItem>)
-                }
-            </div>
-            <div className='flex-1'></div>
-        </div>
+        <Cart formattedItems={formattedItems}></Cart>
     </div>
 };
 
-export default Cart;
+export default CartPage;
