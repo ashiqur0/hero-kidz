@@ -1,6 +1,6 @@
 'use client'
 
-import { deleteCartItem, increaseItemDb } from "@/actions/server/cart";
+import { decreaseItemDb, deleteCartItem, increaseItemDb } from "@/actions/server/cart";
 import Image from "next/image";
 import { FaPlus, FaMinus, FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
@@ -38,11 +38,19 @@ const CartItem = ({ item, updateQuantity, onRemove }) => {
         });
     }
 
-    const handleUpdateQuantity = async() => {
+    const handleIncreaseQuantity = async() => {
         const result = await increaseItemDb(_id, quantity);
         if (result?.success) {
             Swal.fire('success', "Quantity Updated Successfully", "success");
             updateQuantity(_id, quantity + 1);
+        }
+    }
+
+    const handleDecreaseQuantity = async() => {
+        const result = await decreaseItemDb(_id, quantity);
+        if (result?.success) {
+            Swal.fire('success', "Quantity Updated Successfully", "success");
+            updateQuantity(_id, quantity - 1);
         }
     }
 
@@ -70,7 +78,7 @@ const CartItem = ({ item, updateQuantity, onRemove }) => {
             <div className="flex items-center gap-2">
                 <button
                     className="btn btn-sm btn-outline"
-                    // onClick={handleUpdateQuantity}
+                    onClick={handleDecreaseQuantity}
                     disabled={quantity <= 1}
                 >
                     <FaMinus />
@@ -80,7 +88,7 @@ const CartItem = ({ item, updateQuantity, onRemove }) => {
 
                 <button
                     className="btn btn-sm btn-outline"
-                    onClick={handleUpdateQuantity}
+                    onClick={handleIncreaseQuantity}
                 >
                     <FaPlus />
                 </button>

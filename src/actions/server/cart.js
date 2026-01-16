@@ -80,3 +80,21 @@ export const increaseItemDb = async (id, quantity) => {
     const result = await cartCollection.updateOne(query, updatedData);
     return { success: Boolean(result.modifiedCount) };
 }
+
+export const decreaseItemDb = async (id, quantity) => {
+    const { user } = await getServerSession(authOptions) || {};
+    if (!user) return { success: false };
+
+    if (quantity <= 1) {
+        return { success: false, message: 'You can not buy less than 1 product' };
+    }
+
+    const query = { _id: new ObjectId(id) };
+    const updatedData = {
+        $inc: {
+            quantity: -1
+        }
+    }
+    const result = await cartCollection.updateOne(query, updatedData);
+    return { success: Boolean(result.modifiedCount) };
+}
