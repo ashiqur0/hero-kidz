@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { FaStar, FaShoppingCart } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 import Link from "next/link";
-import { CgDetailsMore } from "react-icons/cg";
+import AddToCurt from "../buttons/AddToCurtButton";
 
 const ProductCard = ({ product }) => {
   
@@ -57,14 +57,10 @@ const ProductCard = ({ product }) => {
         </div>
 
         {/* Button */}
-        <div className="card-actions mt-3">
-          <button className="btn btn-primary btn-sm w-full flex items-center gap-2">
-            <FaShoppingCart />
-            Add To Cart
-          </button>
+        <div className="card-actions mt-3 grid grid-cols-2 items-center">
+          <AddToCurt />
 
-          <Link href={`/products/${_id}`} className="btn btn-primary btn-sm w-full flex items-center gap-2">
-            <CgDetailsMore />
+          <Link href={`/products/${_id}`} className="btn btn-primary mt-4 w-full md:w-auto">
             View Details
           </Link>
         </div>

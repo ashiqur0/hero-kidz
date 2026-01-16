@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter } from "next/navigation";
 
-const AddToCurtButton = ({ product }) => {
+const AddToCurt = ({ product }) => {
 
     const isLoggedIn = false;
     const router = useRouter();
@@ -20,4 +20,4 @@ const AddToCurtButton = ({ product }) => {
     );
 };
 
-export default AddToCurtButton;
+export default AddToCurt;
