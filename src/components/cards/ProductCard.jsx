@@ -4,7 +4,7 @@ import Link from "next/link";
 import AddToCurt from "../buttons/AddToCurtButton";
 
 const ProductCard = ({ product }) => {
-  
+
   const { _id, title, image, price, discount, ratings, reviews, sold } = product;
 
   // calculate discounted price
@@ -58,9 +58,9 @@ const ProductCard = ({ product }) => {
 
         {/* Button */}
         <div className="card-actions mt-3 grid grid-cols-2 items-center">
-          <AddToCurt />
+          <AddToCurt product={{ ...product, _id: _id.toString() }} />
 
-          <Link href={`/products/${_id}`} className="btn btn-primary mt-4 w-full md:w-auto">
+          <Link href={`/products/${_id}`} className="btn btn-primary btn-outline mt-4 w-full md:w-auto">
             View Details
           </Link>
         </div>
