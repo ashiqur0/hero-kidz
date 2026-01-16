@@ -1,6 +1,7 @@
 'use server'
 
 import { authOptions } from "@/lib/authOptions";
+import { ObjectId } from "mongodb";
 import { getServerSession } from "next-auth";
 
 const { collections, dbConnect } = require("@/lib/dbConnect");
@@ -49,4 +50,14 @@ export const getCart = async () => {
     const query = { email: user?.email };
     const result = await cartCollection.find(query).toArray();
     return result;
+}
+
+export const deleteCartItem = async (id) => {
+    const { user } = await getServerSession(authOptions) || {};
+    if (!user) return { success: false };
+
+    const query = { _id: new ObjectId(id) };
+    const result = await cartCollection.deleteOne(query);
+    
+    return {success: Boolean(result?.deletedCount)};
 }
