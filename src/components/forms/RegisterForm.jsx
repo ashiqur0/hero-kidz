@@ -21,7 +21,7 @@ const RegisterForm = () => {
         const user = { name, email, password };
 
         const result = await postUser(user);
-        if (result.acknowledged) {
+        if (result?.acknowledged) {
 
             const result = await signIn('credentials', {
                 email, password,

@@ -24,7 +24,7 @@ const LoginForm = () => {
             Swal.fire('success', 'Welcome to Hero Kidz', 'success');
             router.push(callbackUrl);
         } else {
-            Swal.fire('error', 'Email and password not matched', 'error');
+            Swal.fire('error', 'Email and password not matched. Try Google Login / Register', 'error');
         }
     }
 

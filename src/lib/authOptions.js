@@ -27,7 +27,7 @@ export const authOptions = {
       try {
 
         const payload = {
-          ...user, 
+          ...user,
           provider: account.provider,
           providerId: account.providerAccountId,
           role: 'user',
@@ -39,10 +39,9 @@ export const authOptions = {
         }
 
         const isExists = await dbConnect(collections.USERS).findOne({
-          email: user.email,
-          providerId: account.providerAccountId
+          email: user.email
         });
-        
+
         if (!isExists) {
           const result = await dbConnect(collections.USERS).insertOne(payload);
         }
