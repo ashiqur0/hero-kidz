@@ -8,7 +8,9 @@ import Swal from "sweetalert2";
 
 const RegisterForm = () => {
 
-    const callbackUrl = useSearchParams().get('callbackUrl') || '/';
+    const params = useSearchParams();
+    const callbackUrl = params.get('callbackUrl') || '/';
+    const router = useRouter();
 
     const handleRegister = async (e) => {
         e.preventDefault();
@@ -20,12 +22,16 @@ const RegisterForm = () => {
 
         const result = await postUser(user);
         if (result.acknowledged) {
-            Swal.fire('success', 'Welcome to Hero Kidz', 'success');
 
             const result = await signIn('credentials', {
                 email, password,
-                callbackUrl: callbackUrl
+                redirect: false
             });
+
+            if (result.ok) {
+                Swal.fire('success', 'Welcome to Hero Kidz', 'success');
+                router.push(callbackUrl);
+            }
         } else {
             Swal.fire('error', 'Registration failed', 'error');
         }
