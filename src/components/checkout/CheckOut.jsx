@@ -2,12 +2,14 @@
 
 import { createOrder } from "@/actions/server/order";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import Swal from "sweetalert2";
 
 const CheckOut = ({ cartItems = [] }) => {
 
     const session = useSession();
+    const router = useRouter();
     const [form, setForm] = useState({
         name: '',
         email: '',
@@ -39,6 +41,10 @@ const CheckOut = ({ cartItems = [] }) => {
 
         if (result?.insertedId) {
             Swal.fire('success', "Order placed successfully", "success");
+            router.push('/');
+        } else {
+            Swal.fire('error', "Failed to placed your order. Contact with developer", "error");
+            router.push('/cart')
         }
     }
 
