@@ -9,7 +9,7 @@ export async function proxy(req) {
     const isPrivateReq = privateRoute.some((route) => req.nextUrl.pathname.startsWith(route));
 
     if (isPrivateReq && !isAuthenticated) {
-        return NextResponse.redirect(new URL('/', req.url));
+        return NextResponse.redirect(new URL(`/login?callbackUrl=${reqPath}`, req.url));
     }
 
     return NextResponse.next();
