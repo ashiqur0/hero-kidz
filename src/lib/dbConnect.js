@@ -7,7 +7,8 @@ const db_name = process.env.DB_NAME;
 export const collections = {
     PRODUCTS: 'products',
     USERS: 'users',
-    CART: 'cart'
+    CART: 'cart',
+    ORDERS: 'orders'
 }
 
 // Create a MongoClient

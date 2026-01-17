@@ -1,8 +1,20 @@
 'use client'
 
-import { useMemo } from "react";
+import { createOrder } from "@/actions/server/order";
+import { useSession } from "next-auth/react";
+import { useMemo, useState } from "react";
+import Swal from "sweetalert2";
 
 const CheckOut = ({ cartItems = [] }) => {
+
+    const session = useSession();
+    const [form, setForm] = useState({
+        name: '',
+        email: '',
+        address: '',
+        phone: '',
+        instructions: ''
+    });
 
     const totalItems = useMemo(
         () => cartItems.reduce((sum, item) => sum + item.quantity, 0),
@@ -14,15 +26,31 @@ const CheckOut = ({ cartItems = [] }) => {
         [cartItems]
     );
 
+    const handlePlaceOrder = async (e) => {
+        e.preventDefault();
+        const payload = {
+            name: e.target.name.value,
+            email: e.target.email.value,
+            address: form.address,
+            instructions: form.instructions,
+            phone: form.phone,
+        }
+        const result = await createOrder(payload);
+
+        if (result?.insertedId) {
+            Swal.fire('success', "Order placed successfully", "success");
+        }
+    }
+
     return (
         <div className="max-w-7xl mx-auto py-8">
             <div className="flex gap-8">
-                
+
                 {/* Left: Checkout Form */}
                 <div className="flex-3 p-6 shadow-sm">
-                    <h2 className="text-xl font-bold mb-6">Checkout Information</h2>
+                    <h2 className="text-xl font-bold mb-6">Delivery Information</h2>
 
-                    <form className="space-y-4">
+                    <form className="space-y-4" onSubmit={handlePlaceOrder}>
                         <div>
                             <label className="block text-sm font-medium mb-1">
                                 Full Name
@@ -31,6 +59,9 @@ const CheckOut = ({ cartItems = [] }) => {
                                 type="text"
                                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
                                 placeholder="Enter your full name"
+                                name='name'
+                                value={session?.data?.user?.name}
+                                readOnly
                             />
                         </div>
 
@@ -42,6 +73,9 @@ const CheckOut = ({ cartItems = [] }) => {
                                 type="email"
                                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
                                 placeholder="Enter your email"
+                                name='email'
+                                value={session?.data?.user?.email}
+                                readOnly
                             />
                         </div>
 
@@ -53,6 +87,9 @@ const CheckOut = ({ cartItems = [] }) => {
                                 rows="2"
                                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
                                 placeholder="Enter your address"
+                                value={form.address}
+                                onChange={(e) => setForm({ ...form, address: e.target.value })}
+                                required
                             />
                         </div>
 
@@ -63,7 +100,10 @@ const CheckOut = ({ cartItems = [] }) => {
                             <textarea
                                 rows="2"
                                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
-                                placeholder="Enter your address"
+                                placeholder="Enter your instructions"
+                                value={form.instructions}
+                                onChange={(e) => setForm({ ...form, instructions: e.target.value })}
+                                required
                             />
                         </div>
 
@@ -75,6 +115,9 @@ const CheckOut = ({ cartItems = [] }) => {
                                 type="tel"
                                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
                                 placeholder="Enter phone number"
+                                value={form.phone}
+                                onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                                required
                             />
                         </div>
 
