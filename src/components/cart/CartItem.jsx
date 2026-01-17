@@ -2,11 +2,13 @@
 
 import { decreaseItemDb, deleteCartItem, increaseItemDb } from "@/actions/server/cart";
 import Image from "next/image";
+import { useState } from "react";
 import { FaPlus, FaMinus, FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
 
 const CartItem = ({ item, updateQuantity, onRemove }) => {
     const { _id, title, image, quantity, price } = item;
+    const [loading, setLoading] = useState(false);
 
     const handleDeleteCartItem = async () => {
         Swal.fire({
@@ -38,20 +40,24 @@ const CartItem = ({ item, updateQuantity, onRemove }) => {
         });
     }
 
-    const handleIncreaseQuantity = async() => {
+    const handleIncreaseQuantity = async () => {
+        setLoading(true);
         const result = await increaseItemDb(_id, quantity);
         if (result?.success) {
-            Swal.fire('success', "Quantity Updated Successfully", "success");
+            Swal.fire('success', "Quantity Increase", "success");
             updateQuantity(_id, quantity + 1);
         }
+        setLoading(false);
     }
 
-    const handleDecreaseQuantity = async() => {
+    const handleDecreaseQuantity = async () => {
+        setLoading(true);
         const result = await decreaseItemDb(_id, quantity);
         if (result?.success) {
-            Swal.fire('success', "Quantity Updated Successfully", "success");
+            Swal.fire('success', "Quantity Decrease", "success");
             updateQuantity(_id, quantity - 1);
         }
+        setLoading(false);
     }
 
     return (
@@ -79,7 +85,7 @@ const CartItem = ({ item, updateQuantity, onRemove }) => {
                 <button
                     className="btn btn-sm btn-outline"
                     onClick={handleDecreaseQuantity}
-                    disabled={quantity <= 1}
+                    disabled={quantity <= 1 || loading}
                 >
                     <FaMinus />
                 </button>
@@ -88,6 +94,7 @@ const CartItem = ({ item, updateQuantity, onRemove }) => {
 
                 <button
                     className="btn btn-sm btn-outline"
+                    disabled={quantity >= 10 || loading}
                     onClick={handleIncreaseQuantity}
                 >
                     <FaPlus />
