@@ -2,7 +2,7 @@
 
 import { authOptions } from "@/lib/authOptions";
 import { getServerSession } from "next-auth";
-import { getCart } from "./cart";
+import { clearCart, getCart } from "./cart";
 
 const { dbConnect, collections } = require("@/lib/dbConnect")
 const ordersCollection = dbConnect(collections.ORDERS);
@@ -10,7 +10,7 @@ const ordersCollection = dbConnect(collections.ORDERS);
 export const createOrder = async (payload) => {
     const { user } = await getServerSession(authOptions) || {};
     if (!user) return { success: false };
-    
+
     const cart = await getCart();
     if (cart.length === 0) return { success: false };
 
@@ -19,8 +19,11 @@ export const createOrder = async (payload) => {
         items: cart,
         ...payload
     }
-
     const result = await ordersCollection.insertOne(newOrder);
 
-    return {...result, insertedId: result.insertedId.toString() };
+    if (Boolean(result.insertedId)) {
+        const result = await clearCart();
+    }
+
+    return { ...result, insertedId: result.insertedId.toString() };
 }
