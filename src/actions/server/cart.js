@@ -22,7 +22,7 @@ export const handleCart = async (productId) => {
     if (isAdded) {
         const updatedData = {
             $inc: {
-                quantity: inc ? 1 : -1
+                quantity: 1
             }
         }
         const result = await cartCollection.updateOne(query, updatedData);
