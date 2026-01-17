@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import CartItem from "./CartItem";
+import Link from "next/link";
 
 const Cart = ({ formattedItems = [] }) => {
 
@@ -25,7 +26,7 @@ const Cart = ({ formattedItems = [] }) => {
 
             <div className="flex gap-6">
                 {/* Cart Items */}
-                <div className="flex-\[3]\">
+                <div className="flex-3">
                     {items.map(item => (
                         <CartItem
                             key={item._id.toString()}
@@ -37,8 +38,8 @@ const Cart = ({ formattedItems = [] }) => {
                 </div>
 
                 {/* Summary Card */}
-                <div className="flex-1 border rounded-lg p-4 shadow-md h-fit">
-                    <h2 className="text-lg font-bold mb-4">Order Summary</h2>
+                <div className="flex-1 p-4 shadow-md h-fit">
+                    <h2 className="text-lg font-bold border-b mb-5">Order Summary</h2>
 
                     <div className="space-y-3 text-sm">
                         {items.map(item => (
@@ -46,9 +47,9 @@ const Cart = ({ formattedItems = [] }) => {
                                 key={item._id}
                                 className="flex justify-between border-b pb-2"
                             >
-                                <div>
-                                    <p className="font-medium">{item.title}</p>
-                                    <p className="text-gray-500">
+                                <div className="">
+                                    <p className="font-semibold">{item.title}</p>
+                                    <p className="text-gray-500 text-[14px]">
                                         Qty: {item.quantity} × ৳{item.price}
                                     </p>
                                 </div>
@@ -59,10 +60,10 @@ const Cart = ({ formattedItems = [] }) => {
                         ))}
                     </div>
 
-                    <div className="mt-4 border-t pt-3">
-                        <div className="flex justify-between">
+                    <div className="mt-10">
+                        <div className="flex justify-between text-[14px]">
                             <span>Total Items</span>
-                            <span>{totalItems}</span>
+                            <span>{totalItems} pcs</span>
                         </div>
                         <div className="flex justify-between font-bold text-lg mt-1">
                             <span>Total Price</span>
@@ -70,11 +71,11 @@ const Cart = ({ formattedItems = [] }) => {
                         </div>
                     </div>
 
-                    <button
-                        className="mt-4 w-full bg-primary text-white py-2 rounded hover:opacity-90"
+                    <Link href={'/checkout'}
+                        className="mt-8 btn w-full bg-primary text-white py-2 rounded hover:opacity-90"
                     >
                         Confirm Order
-                    </button>
+                    </Link>
                 </div>
             </div>
         </div>
