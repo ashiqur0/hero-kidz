@@ -18,7 +18,7 @@ const AddToCurt = ({ product }) => {
     const add2Cart = async () => {
         if (isLoggedIn) {
             setIsLoading(true);
-            const result = await handleCart({ product, inc: true });
+            const result = await handleCart(product._id);
             if (result?.success) {
                 Swal.fire('Added to cart', product?.title, 'success');
             } else {

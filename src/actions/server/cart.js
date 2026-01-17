@@ -8,14 +8,14 @@ import { cache } from "react";
 const { collections, dbConnect } = require("@/lib/dbConnect");
 const cartCollection = dbConnect(collections.CART);
 
-export const handleCart = async ({ product, inc = true }) => {
+export const handleCart = async (productId) => {
     const { user } = await getServerSession(authOptions) || {};
     if (!user) {
         return { success: false };
     }
 
     // getCartItem-> user.email && productId
-    const query = { email: user?.email, productId: product?._id };
+    const query = { email: user?.email, productId };
     const isAdded = await cartCollection.findOne(query);
 
     // if Exist: update cart
@@ -28,6 +28,9 @@ export const handleCart = async ({ product, inc = true }) => {
         const result = await cartCollection.updateOne(query, updatedData);
         return { success: Boolean(result.modifiedCount) };
     } else {
+
+        const product = await dbConnect(collections.PRODUCTS).findOne({ _id: new ObjectId(productId) });
+
         // Not Exist: insert cart
         const newData = {
             productId: product._id,

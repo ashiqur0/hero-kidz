@@ -27,7 +27,8 @@ export const createOrder = async (payload) => {
         const result = await clearCart();
     }
 
-    // Send order invoice email to user
+    const totalPrice = cart.reduce((sum, item) => sum + item.quantity * item.price, 0);
+
     await sendEmail({
         to: user.email,
         subject: "Your Order Invoice - Hero Kidz",
@@ -35,6 +36,7 @@ export const createOrder = async (payload) => {
             user,
             orderId: result.insertedId.toString(),
             items: cart,
+            totalPrice
         })
     });
 
