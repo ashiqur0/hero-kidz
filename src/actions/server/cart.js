@@ -60,7 +60,7 @@ export const deleteCartItem = async (id) => {
     const { user } = await getServerSession(authOptions) || {};
     if (!user) return { success: false };
 
-    const query = { _id: new ObjectId(id) };
+    const query = { _id: new ObjectId(id), email: user?.email };
     const result = await cartCollection.deleteOne(query);
 
     return { success: Boolean(result?.deletedCount) };
